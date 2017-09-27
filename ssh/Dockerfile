@@ -1,4 +1,4 @@
-FROM ubuntu:17.04
+FROM ubuntu:16.04
 MAINTAINER Sean Farrell "shawks03@yahoo.com"
 
 ENV DEBIAN_FRONTEND noninteractive
