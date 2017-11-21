@@ -15,7 +15,7 @@ RUN apt-get update && \
 # Create OpenSSH privilege separation directory
 RUN mkdir /var/run/sshd
 
-# Add the dev user that will run the browser
+# Add the dev user that will run the applications
 RUN adduser --disabled-password --gecos "Dev User" --uid 5001 dev
 
 # Add SSH public key for the dev user
