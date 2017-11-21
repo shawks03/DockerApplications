@@ -27,7 +27,8 @@ RUN chown -R dev:dev /home/dev/.ssh
 RUN sed -i 's/#X11Forwarding/X11Forwarding/' /etc/ssh/sshd_config && \
     sed -i 's/X11Forwarding no/X11Forwarding yes/' /etc/ssh/sshd_config && \
     sed -i 's/#X11DisplayOffset/X11DisplayOffset/' /etc/ssh/sshd_config && \
-    sed -i 's/X11DisplayOffset.*/X11DisplayOffset 10/' /etc/ssh/sshd_config
+    sed -i 's/X11DisplayOffset.*/X11DisplayOffset 10/' /etc/ssh/sshd_config && \
+    echo "X11UseLocalhost no" >> /etc/ssh/sshd_config
 
 # Start SSH so we are ready to make a tunnel
 ENTRYPOINT ["/usr/sbin/sshd", "-D"]
