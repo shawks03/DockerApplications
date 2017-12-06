@@ -1,5 +1,11 @@
 FROM ubuntu:16.04
 MAINTAINER Sean Farrell "shawks03@yahoo.com"
+ARG USER
+ARG ID
+ARG GID
+ENV USER ${USER}
+ENV ID ${ID}
+ENV GID ${GID}
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -15,13 +21,14 @@ RUN apt-get update && \
 # Create OpenSSH privilege separation directory
 RUN mkdir /var/run/sshd
 
-# Add the dev user that will run the applications
-RUN adduser --disabled-password --gecos "Dev User" --uid 5001 dev
+# Add the user that will run the applications
+#RUN addgroup --gid ${GID} users && \
+RUN adduser --disabled-password --gecos "User in container" --uid ${ID} --ingroup users ${USER}
 
-# Add SSH public key for the dev user
-RUN mkdir /home/dev/.ssh
-COPY id_rsa.pub /home/dev/.ssh/authorized_keys
-RUN chown -R dev:dev /home/dev/.ssh
+# Add SSH public key for the user
+RUN mkdir /home/$USER/.ssh
+COPY id_rsa.pub /home/$USER/.ssh/authorized_keys
+RUN chown -R ${USER}:users /home/${USER}/.ssh
 
 # Make sure "X11Forwarding yes" and "X11DisplayOffset 10"
 RUN sed -i 's/#X11Forwarding/X11Forwarding/' /etc/ssh/sshd_config && \
