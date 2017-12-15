@@ -23,11 +23,11 @@ RUN mkdir /var/run/sshd
 
 # Add the user that will run the applications
 #RUN addgroup --gid ${GID} users && \
-RUN adduser --disabled-password --gecos "User in container" --uid ${ID} --ingroup users ${USER}
+RUN adduser --disabled-password --gecos "User in container" --uid ${ID} --gid ${GID} ${USER}
 
 # Add SSH public key for the user
-RUN mkdir /home/$USER/.ssh
-COPY id_rsa.pub /home/$USER/.ssh/authorized_keys
+RUN mkdir /home/${USER}/.ssh
+COPY id_rsa.pub /home/${USER}/.ssh/authorized_keys
 RUN chown -R ${USER}:users /home/${USER}/.ssh
 
 # Make sure "X11Forwarding yes" and "X11DisplayOffset 10"
