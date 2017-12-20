@@ -14,5 +14,5 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 RUN wget -c http://mirror.math.princeton.edu/pub/eclipse//technology/epp/downloads/release/oxygen/R/eclipse-cpp-oxygen-R-linux-gtk-x86_64.tar.gz && \
-    tar xvf eclipse-cpp-oxygen-R-linux-gtk-x86_64.tar.gz && \
+    tar xzf eclipse-cpp-oxygen-R-linux-gtk-x86_64.tar.gz && \
     rm eclipse-cpp-oxygen-R-linux-gtk-x86_64.tar.gz
